@@ -1,0 +1,7 @@
+# Hero video: always revalidate (filename is version-bumped on each change).
+/video/*
+  Cache-Control: no-cache, must-revalidate
+
+# Immutable, content-hashed build assets.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable

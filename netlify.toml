@@ -1,0 +1,6 @@
+# Netlify config for a Git-based deploy of this Next.js static export.
+# (For a manual deploy, drag the contents of the built `out/` folder — or the
+#  generated zip — onto the Netlify "Deploys" drop zone instead.)
+[build]
+  command = "npm run build"
+  publish = "out"

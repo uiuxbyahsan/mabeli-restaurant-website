@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Lenis smooth-scroll: disable native smooth so it doesn't fight the rAF loop */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-graphite-950 text-cream font-sans antialiased;
+    font-weight: 300;
+    /* clip (not hidden) so it doesn't create a scroll container that breaks position: sticky */
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgba(201, 168, 106, 0.85);
+    color: #121212;
+  }
+
+  /* Dark scrollbar with gold thumb */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4a4438;
+    border-radius: 99px;
+    border: 2px solid #1a1a1a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6b5e44;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Page max-width wrapper */
+  .container-mab {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8 lg:px-12;
+  }
+
+  /* Eyebrow label — small uppercase tracked-out kicker */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[0.72rem] font-medium uppercase tracking-widest3 text-gold;
+  }
+
+  /* Classic menu dotted leader between name and price */
+  .leader {
+    @apply relative flex-1 mx-3 translate-y-[-3px] border-b border-dotted border-graphite-600/70;
+  }
+
+  /* Gold gradient hairline */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 168, 106, 0.55) 20%,
+      rgba(212, 185, 140, 0.9) 50%,
+      rgba(201, 168, 106, 0.55) 80%,
+      transparent
+    );
+  }
+
+  /* Subtle film-grain / concrete texture overlay */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  }
+
+  .gold-text {
+    @apply text-gold;
+  }
+
+  /* Luxury display heading — Oswald, uppercase, lightly tracked */
+  .display-title {
+    @apply font-display uppercase;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    text-wrap: balance;
+  }
+
+  /* Hero-scale title */
+  .title-hero {
+    font-size: clamp(2.75rem, 8vw, 6rem);
+    line-height: 1.02;
+  }
+
+  /* Section-scale title */
+  .title-section {
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    line-height: 1.06;
+  }
+}
+
+@layer utilities {
+  /* tabular figures for prices */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+  .text-shadow-lux {
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
